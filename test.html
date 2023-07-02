@@ -1,0 +1,173 @@
+function onFormSubmit(){
+var formData = readFormData();
+insertNewRecord(formData);
+}
+
+function readFormData(){
+var formData = {};
+formData["firstname"] = document.getElementById("firstname").value;
+formData["lastname"] = document.getElementById("lastname").value;
+formData["Email"] = document.getElementById("Email").value;
+formData["gender"] = document.getElementById("gender").value;
+formData["select"] = document.getElementById("select").value;
+
+return formData;
+}
+
+function insertNewRecord(data){
+
+var table = document.getElementById("display").getElementByTagName('tbody')[0];
+var newRow = table.insertRow(table.length);
+cell1 = newRow.insertCell(0);
+cell1.innerHTML = data.firstname;
+cell2 = newRow.insertCell(1);
+cell2.innerHTML = data.lastname;
+cell3 = newRow.insertCell(2);
+cell3.innerHTML = data.Email;
+cell4 = newRow.insertCell(3);
+cell4.innerHTML = data.gender;
+cell5 = newRow.insertCell(4);
+cell5.innerHTML = data.select;
+cell6 = newRow.insertCell(5);
+cell6.innerHTML = `<a>Edit</a>`
+cell7.innerHTML = `<a>Delete</a>`
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var row = 1;
+
+var submit = document.getElementById("submit");
+var update = document.getElementById("update");
+
+submit.addEventListener("click", displayDetails);
+update.addEventListener("click", updateRecord);
+
+
+function displayDetails(){
+
+var firstname = document.getElementById("firstname").value;
+var lastname = document.getElementById("lastname").value;
+var Email = document.getElementById("Email").value;
+var gender = document.getElementById("gender").value;
+var select = document.getElementById("select");
+ 
+
+if(!firstname || !lastname || !Email || !gender || !select ){
+
+        alert ("Please input all the fields");
+        return;
+  }
+
+
+var display = document.getElementById("display");
+
+var newRow = display.insertRow(row);
+
+var cell1 = newRow.insertCell(0);
+var cell2 = newRow.insertCell(1);
+var cell3 = newRow.insertCell(2);
+var cell4 = newRow.insertCell(3);
+var cell5 = newRow.insertCell(4);
+var cell6 = newRow.insertCell(5);
+var cell7 = newRow.insertCell(6);
+
+cell1.innerHTML = firstname;
+cell2.innerHTML = lastname;
+cell3.innerHTML = Email;
+cell4.innerHTML = gender;
+cell5.innerHTML = select;
+cell6.innerHTML = `<button onClick="onEdit(this)"><a>Edit</a></button>`;
+cell7.innerHTML = `<button><a>Delete</a></button>`;
+
+if (select.checked == true){
+
+    cell5.innerHTML = "Yes"
+
+}
+
+else{
+     cell5.innerHTML = "No"
+
+}
+
+resetForm();
+
+row++;
+
+}
+
+
+function resetForm(){
+
+document.getElementById("firstname").value = "";
+document.getElementById("lastname").value = "";
+document.getElementById("Email").value = "";
+document.getElementById("gender").value = "";
+document.getElementById("select").value = "";
+selectedRow = null;
+
+}
+
+function onEdit(td){
+
+selectedRow = td.parentElement.parentElement;
+document.getElementById("firstname").value = selectedRow.cells[0].innerHTML;
+document.getElementById("lastname").value = selectedRow.cells[1].innerHTML;
+document.getElementById("Email").value = selectedRow.cells[2].innerHTML;
+document.getElementById("gender").value = selectedRow.cells[3].innerHTML;
+document.getElementById("select").value = selectedRow.cells[4].innerHTML;
+
+}
+
+function updateRecord(display){
+
+   selectedRow.cells[0].innerHTML = display.firstname;     
+   selectedRow.cells[1].innerHTML = display.lastname;     
+   selectedRow.cells[2].innerHTML = display.lastname;     
+   selectedRow.cells[3].innerHTML = display.lastname;     
+   selectedRow.cells[4].innerHTML = display.lastname;     
+
+}
+
